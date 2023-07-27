@@ -1,11 +1,18 @@
 app:
-  title: Backstage Default App
+  title: Rocket App
   baseUrl: http://localhost:3000
 
 organization:
   name: Annah's Backstage
 
 backend:
+  database:
+    client: pg
+    connection:
+      host: ${POSTGRES_HOST}
+      port: ${POSTGRES_PORT}
+      user: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
@@ -63,7 +70,13 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+  environment: development
+  providers:
+    google:
+      development:
+        clientId: ${GOOGLE_CLIENT_ID}
+        clientSecret: ${GOOGLE_CLIENT_SECRET}
+
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
